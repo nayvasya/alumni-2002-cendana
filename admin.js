@@ -127,3 +127,88 @@ async function loadNewsList() {
 }
 
 loadNewsList();
+
+document.getElementById('eventForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const { data: { user } } = await supabaseClient.auth.getUser();
+
+  const title = document.getElementById('eventTitle').value;
+  const description = document.getElementById('eventDescription').value;
+  const event_date = document.getElementById('eventDate').value;
+  const location = document.getElementById('eventLocation').value;
+
+  const { error } = await supabaseClient
+    .from('events')
+    .insert({ title, description, event_date, location, created_by: user.id });
+
+  if (error) {
+    alert('Gagal tambah event: ' + error.message);
+    return;
+  }
+
+  document.getElementById('eventForm').reset();
+  loadEventsAdminList();
+  notifyAllMembers(`Event baru: ${title}`);
+});
+
+async function loadEventsAdminList() {
+  const { data: events, error } = await supabaseClient
+    .from('events')
+    .select('*')
+    .order('event_date', { ascending: true });
+
+  const container = document.getElementById('eventAdminList');
+
+  if (error || !events) {
+    container.innerHTML = '<p>Gagal memuat event.</p>';
+    return;
+  }
+
+  container.innerHTML = '';
+
+  events.forEach((event) => {
+    const card = document.createElement('div');
+    card.className = 'pending-card';
+    card.innerHTML = `
+      <h3>${event.title}</h3>
+      <p>${new Date(event.event_date).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })} · ${event.location || '-'}</p>
+      <p>${event.description || ''}</p>
+      <button class="delete-event-btn" data-id="${event.id}">Hapus</button>
+    `;
+    container.appendChild(card);
+  });
+
+  document.querySelectorAll('.delete-event-btn').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const confirmed = confirm('Yakin mau hapus event ini?');
+      if (!confirmed) return;
+
+      const { error } = await supabaseClient.from('events').delete().eq('id', btn.dataset.id);
+      if (error) {
+        alert('Gagal hapus: ' + error.message);
+        return;
+      }
+      loadEventsAdminList();
+    });
+  });
+}
+
+loadEventsAdminList();
+
+async function notifyAllMembers(message) {
+  const { data: members } = await supabaseClient
+    .from('profiles')
+    .select('id')
+    .eq('status', 'approved');
+
+  if (!members || members.length === 0) return;
+
+  const notifRows = members.map((m) => ({
+    user_id: m.id,
+    message,
+    link: 'events.html'
+  }));
+
+  await supabaseClient.from('notifications').insert(notifRows);
+}

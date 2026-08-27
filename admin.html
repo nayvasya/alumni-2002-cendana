@@ -25,6 +25,18 @@
   <div id="newsAdminList"></div>
   </section>
 
+  <section class="admin-page">
+    <h2>Kelola Event</h2>
+    <form id="eventForm">
+      <input type="text" id="eventTitle" placeholder="Judul event" required>
+      <textarea id="eventDescription" placeholder="Deskripsi event"></textarea>
+      <input type="date" id="eventDate" required>
+      <input type="text" id="eventLocation" placeholder="Lokasi">
+      <button type="submit">Tambah Event</button>
+    </form>
+    <div id="eventAdminList"></div>
+  </section>
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="supabaseClient.js"></script>
   <script src="admin.js"></script>
