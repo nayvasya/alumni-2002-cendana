@@ -335,3 +335,32 @@ body {
   font-size: 1.6rem;
   margin-bottom: 1rem;
 }
+
+.directory {
+  max-width: 800px;
+  margin: 3rem auto;
+  padding: 2rem;
+}
+
+.directory h2 { text-align: center; margin-bottom: 1.5rem; }
+
+#searchInput {
+  width: 100%;
+  padding: 0.7rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid #d9c9b8;
+  border-radius: 8px;
+}
+
+.member-card {
+  background-color: #fdf6ec;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 0.8rem;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.member-card:hover {
+  transform: translateX(4px);
+}

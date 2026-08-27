@@ -29,7 +29,7 @@ async function loadDashboard() {
   content.innerHTML = `
     <h2>Welcome Home, ${profile.nickname || profile.full_name} 👋</h2>
     <p>Kamu resmi jadi member Alumni Cendana Rumbai 2002.</p>
-    <p><em>(Fitur directory, wall, dan lainnya bakal muncul di sini pas step-step berikutnya)</em></p>
+    <p><a href="directory.html">Lihat Friends 2002</a></p>
   `;
 }
 
