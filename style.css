@@ -364,3 +364,14 @@ body {
 .member-card:hover {
   transform: translateX(4px);
 }
+
+.delete-news-btn {
+  background-color: #d9534f;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  margin-top: 0.5rem;
+}

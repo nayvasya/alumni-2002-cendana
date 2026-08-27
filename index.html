@@ -39,22 +39,8 @@
 
   <section class="news">
     <h2>Latest News</h2>
-    <div class="news-list">
-      <article class="news-item">
-        <span class="news-date">20 Aug 2026</span>
-        <h3>Reuni Akbar 2002 akan diadakan September ini</h3>
-        <p>Simak detail acara dan cara daftar di halaman Event.</p>
-      </article>
-      <article class="news-item">
-        <span class="news-date">15 Aug 2026</span>
-        <h3>Donasi kas alumni bulan ini terkumpul Rp2.500.000</h3>
-        <p>Terima kasih untuk semua yang sudah berkontribusi!</p>
-      </article>
-      <article class="news-item">
-        <span class="news-date">10 Aug 2026</span>
-        <h3>5 alumni baru bergabung minggu ini</h3>
-        <p>Yuk sapa teman-teman lama yang baru gabung.</p>
-      </article>
+    <div class="news-list" id="newsList">
+      <p>Memuat berita...</p>
     </div>
   </section>
 
@@ -87,6 +73,10 @@
   <h2>"Masih ingat 2002?<br>Yuk, kembali berkumpul."</h2>
   <button class="join-button">Register as Member</button>
   </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabaseClient.js"></script>
+  <script src="home.js"></script> 
 
 </body>
 </html>
