@@ -22,6 +22,7 @@ document.getElementById('registerForm').addEventListener('submit', async (e) => 
     kelas: document.getElementById('kelas').value,
     domisili: document.getElementById('domisili').value,
     kota_asal: document.getElementById('kotaAsal').value,
+    birthday: document.getElementById('birthday').value,
     whatsapp: document.getElementById('whatsapp').value,
     dikenal_sebagai: document.getElementById('dikenalSebagai').value,
     aktivitas: document.getElementById('aktivitas').value,

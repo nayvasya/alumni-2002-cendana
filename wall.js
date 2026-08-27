@@ -21,7 +21,27 @@ async function loadWall() {
     return;
   }
 
+  loadTagOptions();
   loadPosts();
+}
+
+async function loadTagOptions() {
+  const { data: members } = await supabaseClient
+    .from('profiles')
+    .select('id, full_name, nickname')
+    .eq('status', 'approved');
+
+  const select = document.getElementById('postTags');
+  select.innerHTML = '';
+
+  members
+    .filter((m) => m.id !== currentUserId)
+    .forEach((m) => {
+      const option = document.createElement('option');
+      option.value = m.id;
+      option.textContent = m.nickname || m.full_name;
+      select.appendChild(option);
+    });
 }
 
 document.getElementById('postForm').addEventListener('submit', async (e) => {
@@ -29,13 +49,30 @@ document.getElementById('postForm').addEventListener('submit', async (e) => {
 
   const content = document.getElementById('postContent').value;
 
-  const { error } = await supabaseClient
+  const { data: newPost, error } = await supabaseClient
     .from('posts')
-    .insert({ author_id: currentUserId, content });
+    .insert({ author_id: currentUserId, content })
+    .select()
+    .single();
 
   if (error) {
     alert('Gagal posting: ' + error.message);
     return;
+  }
+
+  const tagSelect = document.getElementById('postTags');
+  const taggedIds = Array.from(tagSelect.selectedOptions).map((opt) => opt.value);
+
+  if (taggedIds.length > 0) {
+    const tagRows = taggedIds.map((id) => ({ post_id: newPost.id, tagged_user_id: id }));
+    await supabaseClient.from('post_tags').insert(tagRows);
+
+    const notifRows = taggedIds.map((id) => ({
+      user_id: id,
+      message: 'Kamu ditag di sebuah post.',
+      link: 'wall.html'
+    }));
+    await supabaseClient.from('notifications').insert(notifRows);
   }
 
   document.getElementById('postForm').reset();
@@ -75,6 +112,7 @@ async function loadPosts() {
         <span class="post-date">${date}</span>
       </div>
       <p class="post-content">${post.content}</p>
+      <p class="post-tags" data-post-id="${post.id}"></p>
 
       <button class="like-btn" data-post-id="${post.id}">🤍 <span class="like-count">0</span></button>
 
@@ -91,6 +129,7 @@ async function loadPosts() {
   posts.forEach((post) => {
     loadComments(post.id);
     loadLikes(post.id);
+    loadTags(post.id);
   });
 
   document.querySelectorAll('.comment-form').forEach((form) => {
@@ -119,6 +158,24 @@ async function loadPosts() {
   document.querySelectorAll('.like-btn').forEach((btn) => {
     btn.addEventListener('click', () => toggleLike(btn.dataset.postId));
   });
+}
+
+async function loadTags(postId) {
+  const { data: tags, error } = await supabaseClient
+    .from('post_tags')
+    .select('profiles(full_name, nickname)')
+    .eq('post_id', postId);
+
+  const container = document.querySelector(`.post-tags[data-post-id="${postId}"]`);
+  if (!container) return;
+
+  if (error || !tags || tags.length === 0) {
+    container.textContent = '';
+    return;
+  }
+
+  const names = tags.map((t) => t.profiles.nickname || t.profiles.full_name);
+  container.textContent = `Bareng: ${names.join(', ')}`;
 }
 
 async function loadComments(postId) {

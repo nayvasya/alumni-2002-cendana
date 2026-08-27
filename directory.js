@@ -31,7 +31,29 @@ async function loadDirectory() {
   }
 
   allMembers = members;
+  populateFilters(allMembers);
   renderMembers(allMembers);
+}
+
+function populateFilters(members) {
+  const kelasSet = new Set(members.map((m) => m.kelas));
+  const kotaSet = new Set(members.map((m) => m.kota_asal));
+
+  const kelasSelect = document.getElementById('filterKelas');
+  kelasSet.forEach((kelas) => {
+    const option = document.createElement('option');
+    option.value = kelas;
+    option.textContent = kelas;
+    kelasSelect.appendChild(option);
+  });
+
+  const kotaSelect = document.getElementById('filterKota');
+  kotaSet.forEach((kota) => {
+    const option = document.createElement('option');
+    option.value = kota;
+    option.textContent = kota;
+    kotaSelect.appendChild(option);
+  });
 }
 
 function renderMembers(members) {
@@ -49,15 +71,29 @@ function renderMembers(members) {
   });
 }
 
-document.getElementById('searchInput').addEventListener('input', (e) => {
-  const keyword = e.target.value.toLowerCase();
-  const filtered = allMembers.filter((m) =>
-    m.full_name.toLowerCase().includes(keyword) ||
-    m.kelas.toLowerCase().includes(keyword) ||
-    m.domisili.toLowerCase().includes(keyword) ||
-    m.kota_asal.toLowerCase().includes(keyword)
-  );
+function applyFilters() {
+  const keyword = document.getElementById('searchInput').value.toLowerCase();
+  const kelasFilter = document.getElementById('filterKelas').value;
+  const kotaFilter = document.getElementById('filterKota').value;
+
+  const filtered = allMembers.filter((m) => {
+    const matchKeyword =
+      m.full_name.toLowerCase().includes(keyword) ||
+      m.kelas.toLowerCase().includes(keyword) ||
+      m.domisili.toLowerCase().includes(keyword) ||
+      m.kota_asal.toLowerCase().includes(keyword);
+
+    const matchKelas = !kelasFilter || m.kelas === kelasFilter;
+    const matchKota = !kotaFilter || m.kota_asal === kotaFilter;
+
+    return matchKeyword && matchKelas && matchKota;
+  });
+
   renderMembers(filtered);
-});
+}
+
+document.getElementById('searchInput').addEventListener('input', applyFilters);
+document.getElementById('filterKelas').addEventListener('change', applyFilters);
+document.getElementById('filterKota').addEventListener('change', applyFilters);
 
 loadDirectory();

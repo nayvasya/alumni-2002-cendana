@@ -677,3 +677,63 @@ body {
   border-radius: 6px;
   border: 1px solid #ccc;
 }
+
+.filter-bar {
+  display: flex;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.filter-bar select {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.edit-profile-page {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.edit-profile-page form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.birthday-reminder {
+  background: #fff8e1;
+  border: 1px solid #ffe082;
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-top: 10px;
+  font-size: 0.9rem;
+}
+
+.birthday-month-section {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
+
+#postTags {
+  min-height: 80px;
+}
+
+.post-tags {
+  font-size: 0.85rem;
+  color: #4a90d9;
+  margin: 4px 0;
+}
+
+.memories-page {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.memories-page h3 {
+  margin-top: 25px;
+  margin-bottom: 10px;
+}
