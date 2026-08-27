@@ -10,6 +10,37 @@ body {
   color: #3a2e28; /* coklat tua, lebih hangat daripada hitam pekat */
 }
 
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #fdf6ec;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.navbar-logo {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.navbar-links a {
+  text-decoration: none;
+  color: #3a2e28;
+  font-weight: 500;
+}
+
+.navbar-links a:hover {
+  color: #d97744;
+}
+
 .hero {
   min-height: 100vh; /* tinggi sepenuh layar */
   display: flex;
@@ -123,4 +154,102 @@ body {
 .news-item p {
   font-size: 0.95rem;
   color: #6b5b4f;
+}
+
+.kas {
+  padding: 4rem 2rem;
+  text-align: center;
+  background-color: #fdf6ec;
+}
+
+.kas h2 {
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+}
+
+.kas-card {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  max-width: 700px;
+  margin: 0 auto 1rem;
+}
+
+.kas-stat {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  min-width: 180px;
+}
+
+.kas-label {
+  font-size: 0.85rem;
+  color: #a68a75;
+  margin-bottom: 0.5rem;
+}
+
+.kas-value {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #3a2e28;
+}
+
+.kas-updated {
+  font-size: 0.9rem;
+  color: #6b5b4f;
+  margin-bottom: 1rem;
+}
+
+.kas-button {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #d97744;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.about {
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.about h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.about p {
+  max-width: 600px;
+  margin: 0 auto;
+  color: #6b5b4f;
+  line-height: 1.6;
+}
+
+.join {
+  padding: 5rem 2rem;
+  text-align: center;
+  background-color: #3a2e28;
+  color: white;
+}
+
+.join h2 {
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  font-style: italic;
+}
+
+.join-button {
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #d97744;
+  color: white;
+  font-size: 1.1rem;
+  cursor: pointer;
 }
