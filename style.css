@@ -323,3 +323,15 @@ body {
 
 .approve-btn { background-color: #4caf50; }
 .reject-btn { background-color: #d9534f; }
+
+.dashboard {
+  max-width: 600px;
+  margin: 4rem auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.dashboard h2 {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+}

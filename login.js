@@ -12,5 +12,5 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
   }
 
   alert('Login berhasil! Selamat datang kembali.');
-  window.location.href = 'index.html';
+  window.location.href = 'dashboard.html';
 });
