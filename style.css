@@ -375,3 +375,14 @@ body {
   font-size: 0.95rem;
   margin-top: 0.5rem;
 }
+
+.kas-page { max-width: 700px; margin: 3rem auto; padding: 2rem; }
+.kas-page h2, .kas-page h3 { text-align: center; }
+.kas-page h3 { margin-top: 2rem; margin-bottom: 1rem; }
+
+.kas-table { width: 100%; border-collapse: collapse; }
+.kas-table th, .kas-table td {
+  padding: 0.6rem;
+  border-bottom: 1px solid #d9c9b8;
+  text-align: left;
+}

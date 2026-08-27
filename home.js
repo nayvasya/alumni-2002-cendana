@@ -31,3 +31,24 @@ async function loadLatestNews() {
 }
 
 loadLatestNews();
+
+async function loadKasSummary() {
+  const { data: transactions, error } = await supabaseClient
+    .from('transactions')
+    .select('*')
+    .order('transaction_date', { ascending: false });
+
+  if (error || !transactions || transactions.length === 0) return;
+
+  const pemasukan = transactions.filter((t) => t.type === 'pemasukan');
+  const pengeluaran = transactions.filter((t) => t.type === 'pengeluaran');
+  const saldo = pemasukan.reduce((s, t) => s + t.amount, 0) - pengeluaran.reduce((s, t) => s + t.amount, 0);
+
+  document.querySelector('.kas-card').innerHTML = `
+    <div class="kas-stat"><span class="kas-label">Saldo Kas</span><span class="kas-value">Rp ${saldo.toLocaleString('id-ID')}</span></div>
+    <div class="kas-stat"><span class="kas-label">Pemasukan Terakhir</span><span class="kas-value">Rp ${(pemasukan[0]?.amount || 0).toLocaleString('id-ID')}</span></div>
+    <div class="kas-stat"><span class="kas-label">Pengeluaran Terakhir</span><span class="kas-value">Rp ${(pengeluaran[0]?.amount || 0).toLocaleString('id-ID')}</span></div>
+  `;
+}
+
+loadKasSummary();
