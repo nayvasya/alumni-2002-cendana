@@ -21,13 +21,14 @@ async function loadProfile() {
     return;
   }
 
-  content.innerHTML = `
+    content.innerHTML = `
     <h2>${profile.full_name} (${profile.nickname})</h2>
     <p>${profile.kelas} · ${profile.domisili}</p>
     <p><strong>Dulu dikenal sebagai:</strong> ${profile.dikenal_sebagai || '-'}</p>
     <p><strong>Aktivitas:</strong> ${profile.aktivitas || '-'}</p>
     <p><strong>Teman dekat waktu sekolah:</strong> ${profile.teman_dekat || '-'}</p>
     <p><strong>Kenangan paling diingat:</strong> ${profile.kenangan || '-'}</p>
+    ${profileId !== user.id ? `<button onclick="window.location.href='chat.html?with=${profileId}'">Kirim Pesan</button>` : ''}
   `;
 }
 

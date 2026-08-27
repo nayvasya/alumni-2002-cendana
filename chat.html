@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat - Alumni Cendana Rumbai 2002</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <section class="chat-page">
+    <h2>Chat dengan <span id="chatWithName">...</span></h2>
+
+    <div id="chatMessages" class="chat-messages">
+      <p>Memuat...</p>
+    </div>
+
+    <form id="chatForm" class="chat-form">
+      <input type="text" id="chatInput" placeholder="Tulis pesan..." required>
+      <button type="submit">Kirim</button>
+    </form>
+
+    <p><a href="inbox.html">← Kembali ke Inbox</a></p>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabaseClient.js"></script>
+  <script src="chat.js"></script>
+</body>
+</html>

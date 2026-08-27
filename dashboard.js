@@ -35,8 +35,7 @@ async function loadDashboard() {
   content.innerHTML = `
     <h2>Welcome Home, ${profile.nickname || profile.full_name} 👋</h2>
     <p>Kamu resmi jadi member Alumni Cendana Rumbai 2002.</p>
-    <p><a href="directory.html">Lihat Friends 2002</a> · <a href="wall.html">Buka Wall</a> · <a href="gallery.html">Galeri Nostalgia</a> · <a href="events.html">Event</a> · <a href="notifications.html">Notifikasi${count ? ` (${count})` : ''}</a></p>
-  `;
+    <p><a href="directory.html">Lihat Friends 2002</a> · <a href="wall.html">Buka Wall</a> · <a href="gallery.html">Galeri Nostalgia</a> · <a href="events.html">Event</a> · <a href="notifications.html">Notifikasi${count ? ` (${count})` : ''}</a> · <a href="inbox.html">Inbox</a></p>  `;
 }
 
 loadDashboard();
