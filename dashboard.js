@@ -26,10 +26,16 @@ async function loadDashboard() {
     return;
   }
 
+  const { count } = await supabaseClient
+    .from('notifications')
+    .select('*', { count: 'exact', head: true })
+    .eq('user_id', user.id)
+    .eq('is_read', false);
+
   content.innerHTML = `
     <h2>Welcome Home, ${profile.nickname || profile.full_name} 👋</h2>
     <p>Kamu resmi jadi member Alumni Cendana Rumbai 2002.</p>
-    <p><a href="directory.html">Lihat Friends 2002</a> · <a href="wall.html">Buka Wall</a> · <a href="gallery.html">Galeri Nostalgia</a> · <a href="events.html">Event</a></p>
+    <p><a href="directory.html">Lihat Friends 2002</a> · <a href="wall.html">Buka Wall</a> · <a href="gallery.html">Galeri Nostalgia</a> · <a href="events.html">Event</a> · <a href="notifications.html">Notifikasi${count ? ` (${count})` : ''}</a></p>
   `;
 }
 
